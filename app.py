@@ -12,7 +12,7 @@ import seaborn as sns
 
 st.set_page_config(page_title="Práctica 4.2 - Regresión Lineal", layout="wide")
 
-st.title("📊 Práctica 4.2: Regresión Lineal y Correlación")
+st.title(" Práctica 4.2: Regresión Lineal y Correlación")
 st.subheader("Caso de Estudio: Predicción del Consumo Per Cápita de Agua Potable (CPC)")
 
 @st.cache_data
@@ -40,7 +40,7 @@ def cargar_datos():
 
 df_agua = cargar_datos()
 
-tab1, tab2, tab3 = st.tabs(["📋 Datos y Correlación", "📈 Modelo OLS y Métricas", "📊 Panel de Diagnóstico Visual"])
+tab1, tab2, tab3 = st.tabs([" Datos y Correlación", " Modelo OLS y Métricas", " Panel de Diagnóstico Visual"])
 
 with tab1:
     st.write("### --- PASO 1: PRIMEROS 5 REGISTROS OBTENIDOS DE DUCKDB ---")
@@ -57,16 +57,10 @@ X_const = sm.add_constant(X)
 modelo_ols = sm.OLS(Y, X_const).fit()
 
 with tab2:
-    st.write("### --- PASO 3: RESUMEN DEL MODELO OLS (statsmodels) ---")
-    summary_text = modelo_ols.summary().as_text()
-    st.markdown(
-        f"""
-        <div style="background-color: #f8f9fa; padding: 15px; border-radius: 6px; border: 1px solid #e9ecef; overflow-x: auto;">
-            <pre style="font-family: 'Courier New', Courier, monospace; font-size: 13px; color: #212529; margin: 0; white-space: pre;">{summary_text}</pre>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.write("###  Paso 3: Resumen del Modelo OLS")
+    # Mostramos de forma limpia el R cuadrado tal como lo solicitaste
+    r2_val = modelo_ols.rsquared
+    st.markdown(f"**Coeficiente de Determinación ($R^2$):** {r2_val * 100:.2f}% ({r2_val:.4f})")
 
 residuos = modelo_ols.resid
 stat_sw, p_val_sw = stats.shapiro(residuos)
