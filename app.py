@@ -12,7 +12,7 @@ import seaborn as sns
 
 st.set_page_config(page_title="Práctica 4.2 - Regresión Lineal", layout="wide")
 
-st.title("📊 Práctica 4.2: Regresión Lineal y Correlación")
+st.title(" Práctica 4.2: Regresión Lineal y Correlación")
 st.subheader("Caso de Estudio: Predicción del Consumo Per Cápita de Agua Potable (CPC)")
 
 @st.cache_data
