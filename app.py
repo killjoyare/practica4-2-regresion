@@ -67,7 +67,7 @@ def cargar_datos():
     - (0.8 * humedad_max)
     - (5.2 * personas_familia)
     + (15.0 * consumo_bidon_pc)
-    + (random() * 20.0 - 10.0),
+    + (random() * 6.0 - 3.0),
     2
 ) AS cpc_consumo
     FROM variables_agua;
