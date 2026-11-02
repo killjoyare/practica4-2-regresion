@@ -12,7 +12,7 @@ import seaborn as sns
 
 st.set_page_config(page_title="Práctica 4.2 - Regresión Lineal", layout="wide")
 
-st.title(" Práctica 4.2: Regresión Lineal y Correlación")
+st.title("📊 Práctica 4.2: Regresión Lineal y Correlación")
 st.subheader("Caso de Estudio: Predicción del Consumo Per Cápita de Agua Potable (CPC)")
 
 @st.cache_data
@@ -58,9 +58,8 @@ modelo_ols = sm.OLS(Y, X_const).fit()
 
 with tab2:
     st.write("### --- PASO 3: RESUMEN DEL MODELO OLS (statsmodels) ---")
-    # Usamos HTML con fuente monoespaciada para que las tablas de OLS queden perfectamente alineadas
-    summary_html = f"<pre style='font-family: monospace; background-color: #f8f9fa; padding: 15px; border-radius: 5px; border: 1px solid #dee2e6;'>{modelo_ols.summary().as_text()}</pre>"
-    st.markdown(summary_html, unsafe_allow_html=True)
+    # Usamos st.code para mantener los saltos de línea originales de la consola de Python de forma limpia
+    st.code(modelo_ols.summary().as_text(), language="text")
 
 residuos = modelo_ols.resid
 stat_sw, p_val_sw = stats.shapiro(residuos)
