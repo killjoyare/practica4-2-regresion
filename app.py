@@ -12,7 +12,7 @@ import seaborn as sns
 
 st.set_page_config(page_title="Práctica 4.2 - Regresión Lineal", layout="wide")
 
-st.title("📊 Práctica 4.2: Regresión Lineal y Correlación")
+st.title(" Práctica 4.2: Regresión Lineal y Correlación")
 st.subheader("Caso de Estudio: Predicción del Consumo Per Cápita de Agua Potable (CPC)")
 
 @st.cache_data
@@ -40,7 +40,7 @@ def cargar_datos():
 
 df_agua = cargar_datos()
 
-tab1, tab2, tab3 = st.tabs(["📋 Datos y Correlación", "📈 Modelo OLS y Métricas", "📊 Panel de Diagnóstico Visual"])
+tab1, tab2, tab3 = st.tabs([" Datos y Correlación", " Modelo OLS y Métricas", " Panel de Diagnóstico Visual"])
 
 with tab1:
     st.write("### --- PASO 1: PRIMEROS 5 REGISTROS OBTENIDOS DE DUCKDB ---")
@@ -57,7 +57,7 @@ X_const = sm.add_constant(X)
 modelo_ols = sm.OLS(Y, X_const).fit()
 
 with tab2:
-    st.write("### 📉 Paso 3: Resumen del Modelo OLS")
+    st.write("###  Paso 3: Resumen del Modelo OLS")
     # Mostramos de forma limpia el R cuadrado tal como lo solicitaste
     r2_val = modelo_ols.rsquared
     st.markdown(f"**Coeficiente de Determinación ($R^2$):** {r2_val * 100:.2f}% ({r2_val:.4f})")
