@@ -58,8 +58,15 @@ modelo_ols = sm.OLS(Y, X_const).fit()
 
 with tab2:
     st.write("### --- PASO 3: RESUMEN DEL MODELO OLS (statsmodels) ---")
-    # Usamos st.code para mantener los saltos de línea originales de la consola de Python de forma limpia
-    st.code(modelo_ols.summary().as_text(), language="text")
+    summary_text = modelo_ols.summary().as_text()
+    st.markdown(
+        f"""
+        <div style="background-color: #f8f9fa; padding: 15px; border-radius: 6px; border: 1px solid #e9ecef; overflow-x: auto;">
+            <pre style="font-family: 'Courier New', Courier, monospace; font-size: 13px; color: #212529; margin: 0; white-space: pre;">{summary_text}</pre>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 residuos = modelo_ols.resid
 stat_sw, p_val_sw = stats.shapiro(residuos)
