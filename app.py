@@ -21,30 +21,20 @@ def cargar_datos():
     con.execute("SELECT setseed(0.42);")
     con.execute("""
     CREATE TABLE telemetria_agua AS
-    WITH datos_base AS (
-        SELECT
-            residencia_id,
-            ROUND(18 + (random() * 14), 2) AS temperatura_max,
-            ROUND(50 + (random() * 40), 2) AS humedad_max,
-            ROUND(3 + (random() * 4), 0) AS personas_familia,
-            ROUND(0.2 + (random() * 1.8), 2) AS consumo_bidon_pc,
-            (random() * 6.0 - 3.0) AS ruido
-        FROM generate_series(1, 100) AS t(residencia_id)
-    )
     SELECT
         residencia_id,
-        temperatura_max,
-        humedad_max,
-        personas_familia,
-        consumo_bidon_pc,
+        ROUND(18 + (random() * 14), 2) AS temperatura_max,
+        ROUND(50 + (random() * 40), 2) AS humedad_max,
+        ROUND(3 + (random() * 4), 0) AS personas_familia,
+        ROUND(0.2 + (random() * 1.8), 2) AS consumo_bidon_pc,
         ROUND(
-            94.0 + (2.5 * temperatura_max)
-                 - (0.8 * humedad_max)
-                 - (5.2 * personas_familia)
-                 + (15.0 * consumo_bidon_pc)
-                 + ruido, 2
+            94.0 + (2.5 * (18 + random() * 14))
+                 - (0.8 * (50 + random() * 40))
+                 - (5.2 * (3 + random() * 4))
+                 + (15.0 * (0.2 + random() * 1.8))
+                 + (random() * 6.0 - 3.0), 2
         ) AS cpc_consumo
-    FROM datos_base;
+    FROM generate_series(1, 100) AS t(residencia_id);
     """)
     return con.execute("SELECT * FROM telemetria_agua").df()
 
@@ -68,6 +58,7 @@ modelo_ols = sm.OLS(Y, X_const).fit()
 
 with tab2:
     st.write("### 📉 Paso 3: Resumen del Modelo OLS")
+    # Mostramos de forma limpia el R cuadrado tal como lo solicitaste
     r2_val = modelo_ols.rsquared
     st.markdown(f"**Coeficiente de Determinación ($R^2$):** {r2_val * 100:.2f}% ({r2_val:.4f})")
 
